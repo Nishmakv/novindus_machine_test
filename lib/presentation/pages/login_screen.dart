@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:novindus_machine_test/application/bloc/auth/cubit/login_cubit.dart';
+import 'package:novindus_machine_test/application/bloc/auth/login_cubit.dart';
 import 'package:novindus_machine_test/presentation/pages/home_screen.dart';
 import 'package:novindus_machine_test/presentation/widgets/common/text_form_field.dart';
 

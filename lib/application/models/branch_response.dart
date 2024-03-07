@@ -1,14 +1,14 @@
 // To parse this JSON data, do
 //
-//     final getBranch = getBranchFromJson(jsonString);
+//     final BranchResponse = BranchResponseFromJson(jsonString);
 
 import 'dart:convert';
 
-List<GetBranch> getBranchFromJson(String str) => List<GetBranch>.from(json.decode(str).map((x) => GetBranch.fromJson(x)));
+List<BranchResponse> BranchResponseFromJson(String str) => List<BranchResponse>.from(json.decode(str).map((x) => BranchResponse.fromJson(x)));
 
-String getBranchToJson(List<GetBranch> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String BranchResponseToJson(List<BranchResponse> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class GetBranch {
+class BranchResponse {
     int id;
     String name;
     int patientsCount;
@@ -19,7 +19,7 @@ class GetBranch {
     String gst;
     bool isActive;
 
-    GetBranch({
+    BranchResponse({
         required this.id,
         required this.name,
         required this.patientsCount,
@@ -31,7 +31,7 @@ class GetBranch {
         required this.isActive,
     });
 
-    factory GetBranch.fromJson(Map<String, dynamic> json) => GetBranch(
+    factory BranchResponse.fromJson(Map<String, dynamic> json) => BranchResponse(
         id: json["id"],
         name: json["name"],
         patientsCount: json["patients_count"],

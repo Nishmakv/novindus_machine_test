@@ -8,14 +8,18 @@ class TextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(
-        label: Text(label),
-        hintText: hint,
-          border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-      )),
+    return Column(
+      children: [
+        Text(label),
+        TextFormField(
+          controller: controller,
+          decoration: InputDecoration(
+            hintText: hint,
+              border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          )),
+        ),
+      ],
     );
   }
 }

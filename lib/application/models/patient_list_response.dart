@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final patient = patientFromJson(jsonString);
-
 import 'dart:convert';
 
 List<Patient> patientFromJson(String str) => List<Patient>.from(json.decode(str).map((x) => Patient.fromJson(x)));
@@ -12,7 +8,7 @@ class Patient {
     int id;
     List<PatientdetailsSet> patientdetailsSet;
     Branch? branch;
-    User? user;
+    String? user;
     Payment payment;
     String name;
     String phone;
@@ -46,11 +42,12 @@ class Patient {
         required this.createdAt,
         required this.updatedAt,
     });
+    
     factory Patient.fromJson(Map<String, dynamic> json) => Patient(
         id: json["id"],
         patientdetailsSet: List<PatientdetailsSet>.from(json["patientdetails_set"].map((x) => PatientdetailsSet.fromJson(x))),
         branch: json["branch"] == null ? null : Branch.fromJson(json["branch"]),
-        user: userValues.map[json["user"]]!,
+        user: json["user"]!,
         payment: paymentValues.map[json["payment"]]!,
         name: json["name"],
         phone: json["phone"],
@@ -70,7 +67,7 @@ class Patient {
         "id": id,
         "patientdetails_set": List<dynamic>.from(patientdetailsSet.map((x) => x.toJson())),
         "branch": branch?.toJson(),
-        "user": userValues.reverse[user],
+        "user": user,
         "payment": paymentValues.reverse[payment],
         "name": name,
         "phone": phone,
@@ -89,12 +86,12 @@ class Patient {
 
 class Branch {
     int id;
-    Name name;
+    String name;
     int patientsCount;
-    Location location;
-    Phone phone;
-    Mail mail;
-    Address address;
+    String location;
+    String phone;
+    String mail;
+    String address;
     String gst;
     bool isActive;
 
@@ -112,86 +109,28 @@ class Branch {
 
     factory Branch.fromJson(Map<String, dynamic> json) => Branch(
         id: json["id"],
-        name: nameValues.map[json["name"]]!,
+        name: json["name"],
         patientsCount: json["patients_count"],
-        location: locationValues.map[json["location"]]!,
-        phone: phoneValues.map[json["phone"]]!,
-        mail: mailValues.map[json["mail"]]!,
-        address: addressValues.map[json["address"]]!,
+        location: json["location"],
+        phone: json["phone"],
+        mail: json["mail"],
+        address: json["address"],
         gst: json["gst"],
         isActive: json["is_active"],
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
-        "name": nameValues.reverse[name],
+        "name": name,
         "patients_count": patientsCount,
-        "location": locationValues.reverse[location],
-        "phone": phoneValues.reverse[phone],
-        "mail": mailValues.reverse[mail],
-        "address": addressValues.reverse[address],
+        "location": location,
+        "phone": phone,
+        "mail": mail,
+        "address": address,
         "gst": gst,
         "is_active": isActive,
     };
 }
-
-enum Address {
-    KOCHI_KERALA_685565,
-    KOTTAYAM_KERALA_686563,
-    KOZHIKODE
-}
-
-final addressValues = EnumValues({
-    "Kochi, Kerala-685565": Address.KOCHI_KERALA_685565,
-    "Kottayam, Kerala-686563": Address.KOTTAYAM_KERALA_686563,
-    "Kozhikode": Address.KOZHIKODE
-});
-
-enum Location {
-    KOCHI,
-    KOZHIKODE,
-    KUMARAKOM_KOTTAYAM
-}
-
-final locationValues = EnumValues({
-    "Kochi": Location.KOCHI,
-    "Kozhikode": Location.KOZHIKODE,
-    "Kumarakom, Kottayam": Location.KUMARAKOM_KOTTAYAM
-});
-
-enum Mail {
-    USER123_GMAIL_COM
-}
-
-final mailValues = EnumValues({
-    "user123@gmail.com": Mail.USER123_GMAIL_COM
-});
-
-enum Name {
-    EDAPPALI,
-    KUMARAKOM,
-    NADAKKAVU,
-    THONDAYADU
-}
-
-final nameValues = EnumValues({
-    "Edappali": Name.EDAPPALI,
-    "KUMARAKOM": Name.KUMARAKOM,
-    "Nadakkavu": Name.NADAKKAVU,
-    "Thondayadu": Name.THONDAYADU
-});
-
-enum Phone {
-    PHONE_99463314529747331452,
-    THE_9846123456,
-    THE_99463314529747331452
-}
-
-final phoneValues = EnumValues({
-    "9946331452, 9747331452": Phone.PHONE_99463314529747331452,
-    "9846123456": Phone.THE_9846123456,
-    "9946331452,9747331452": Phone.THE_99463314529747331452
-});
 
 class PatientdetailsSet {
     int id;
@@ -245,23 +184,7 @@ final paymentValues = EnumValues({
     "UPI": Payment.UPI
 });
 
-enum User {
-    EMPTY,
-    HBAGVG,
-    NULL,
-    SS,
-    SSS,
-    VISHNU
-}
 
-final userValues = EnumValues({
-    "": User.EMPTY,
-    "hbagvg": User.HBAGVG,
-    "null": User.NULL,
-    "ss": User.SS,
-    "sss": User.SSS,
-    "Vishnu": User.VISHNU
-});
 
 class EnumValues<T> {
     Map<String, T> map;

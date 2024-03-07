@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:novindus_machine_test/application/models/patient_register_response.dart';
 import 'package:novindus_machine_test/utils/shared_preferences.dart';
 
-class AuthRepository {
+class PatientRegisterRepository {
   Dio client = Dio();
   SharedPrefs prefs = SharedPrefs();
   Future userLogin({
-    required String? username,
-    required String? password,
+   required PatientRegisterRequest patientRegisterRequest,
+
   }) async {
     FormData formData = FormData.fromMap({
       "username": "test_user",
@@ -17,7 +18,7 @@ class AuthRepository {
       'https://flutter-amr.noviindus.in/api/Login',
       data: formData,
     );
-
+    print(response);
     if (response.data['status'] = true) {
       prefs.saveToken('token', response.data['token']);
       return true;

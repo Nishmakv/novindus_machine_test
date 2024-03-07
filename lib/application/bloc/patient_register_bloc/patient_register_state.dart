@@ -8,3 +8,6 @@ sealed class PatientRegisterState extends Equatable {
 }
 
 final class PatientRegisterInitial extends PatientRegisterState {}
+final class PatientRegisterLoading extends PatientRegisterState {}
+final class PatientRegisterSuccess extends PatientRegisterState {}
+final class PatientRegisterFailure extends PatientRegisterState {}
