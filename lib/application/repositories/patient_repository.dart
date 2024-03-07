@@ -5,7 +5,7 @@ import 'package:novindus_machine_test/utils/shared_preferences.dart';
 class PatientListRepository {
   Dio client = Dio();
   SharedPrefs prefs = SharedPrefs();
-  Future<List> patientList() async {
+  Future<List<Patient>>patientList() async {
     List<Patient> patient = [];
     String token = await prefs.getToken('token');
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:novindus_machine_test/application/bloc/patient_bloc/cubit/patient_list_cubit.dart';
+import 'package:novindus_machine_test/application/bloc/patient_bloc/cubit/patient_cubit.dart';
 import 'package:novindus_machine_test/application/models/patient_list_response.dart';
 
 class HomeScreen extends StatelessWidget {
