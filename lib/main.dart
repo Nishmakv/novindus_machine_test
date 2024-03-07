@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:novindus_machine_test/presentation/pages/home_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:novindus_machine_test/application/bloc/auth/cubit/login_cubit.dart';
+import 'package:novindus_machine_test/presentation/pages/login_screen.dart';
+
 
 void main() {
-  runApp(MyApp());
+  runApp(BlocProvider(
+    create: (context) => LoginCubit(),
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,10 +19,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-       
-        textTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      home: HomeScreen(),
+      home: LoginScreen(),
     );
   }
 }
