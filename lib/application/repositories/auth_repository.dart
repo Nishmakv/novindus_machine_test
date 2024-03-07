@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:novindus_machine_test/utils/shared_preferences.dart';
+import 'package:novindus_machine_test/utils/utils.dart';
 
 class AuthRepository {
   Dio client = Dio();
