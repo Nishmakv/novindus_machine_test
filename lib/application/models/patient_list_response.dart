@@ -12,7 +12,7 @@ class Patient {
     int id;
     List<PatientdetailsSet> patientdetailsSet;
     Branch? branch;
-    User user;
+    User? user;
     Payment payment;
     String name;
     String phone;
@@ -31,22 +31,21 @@ class Patient {
         required this.id,
         required this.patientdetailsSet,
         required this.branch,
-        required this.user,
+         this.user,
         required this.payment,
         required this.name,
         required this.phone,
         required this.address,
-        required this.price,
+         this.price,
         required this.totalAmount,
         required this.discountAmount,
         required this.advanceAmount,
         required this.balanceAmount,
-        required this.dateNdTime,
+         this.dateNdTime,
         required this.isActive,
         required this.createdAt,
         required this.updatedAt,
     });
-
     factory Patient.fromJson(Map<String, dynamic> json) => Patient(
         id: json["id"],
         patientdetailsSet: List<PatientdetailsSet>.from(json["patientdetails_set"].map((x) => PatientdetailsSet.fromJson(x))),

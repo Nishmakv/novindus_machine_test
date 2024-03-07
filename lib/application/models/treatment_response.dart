@@ -1,14 +1,14 @@
 // To parse this JSON data, do
 //
-//     final treatmentName = treatmentNameFromJson(jsonString);
+//     final TreatmentResponse = TreatmentResponseFromJson(jsonString);
 
 import 'dart:convert';
 
-List<TreatmentName> treatmentNameFromJson(String str) => List<TreatmentName>.from(json.decode(str).map((x) => TreatmentName.fromJson(x)));
+List<TreatmentResponse> TreatmentResponseFromJson(String str) => List<TreatmentResponse>.from(json.decode(str).map((x) => TreatmentResponse.fromJson(x)));
 
-String treatmentNameToJson(List<TreatmentName> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String TreatmentResponseToJson(List<TreatmentResponse> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class TreatmentName {
+class TreatmentResponse {
     int id;
     List<Branch> branches;
     String name;
@@ -18,7 +18,7 @@ class TreatmentName {
     DateTime createdAt;
     DateTime updatedAt;
 
-    TreatmentName({
+    TreatmentResponse({
         required this.id,
         required this.branches,
         required this.name,
@@ -29,7 +29,7 @@ class TreatmentName {
         required this.updatedAt,
     });
 
-    factory TreatmentName.fromJson(Map<String, dynamic> json) => TreatmentName(
+    factory TreatmentResponse.fromJson(Map<String, dynamic> json) => TreatmentResponse(
         id: json["id"],
         branches: List<Branch>.from(json["branches"].map((x) => Branch.fromJson(x))),
         name: json["name"],

@@ -4,6 +4,7 @@ import 'package:novindus_machine_test/application/bloc/auth/cubit/login_cubit.da
 import 'package:novindus_machine_test/application/bloc/patient_bloc/cubit/patient_cubit.dart';
 import 'package:novindus_machine_test/presentation/pages/home_screen.dart';
 import 'package:novindus_machine_test/presentation/pages/login_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MultiBlocProvider(
@@ -26,7 +27,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
+      theme: ThemeData(
+        textTheme: GoogleFonts.poppinsTextTheme(),
+      ),
       home: HomeScreen(),
     );
   }

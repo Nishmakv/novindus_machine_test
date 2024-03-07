@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:novindus_machine_test/application/models/branch_response.dart';
 import 'package:novindus_machine_test/application/models/patient_list_response.dart';
-import 'package:novindus_machine_test/application/models/treatment_response_model.dart';
+import 'package:novindus_machine_test/application/models/treatment_response.dart';
 import 'package:novindus_machine_test/application/repositories/patient_repository.dart';
 
 part 'patient_state.dart';
@@ -12,7 +12,9 @@ class PatientListCubit extends Cubit<PatientListState> {
   PatientListRepository patientListRepository = PatientListRepository();
   List<Patient> patient = [];
   List<GetBranch> getBranch = [];
-  List<TreatmentName> getTreatmentName = [];
+  List<TreatmentResponse> getTreatmentName = [];
+  List<int> selectedTreatmentIds = [];
+  List<TreatmentResponse> selectedTreatments = [];
 
   Future patientList() async {
     emit(PatientListLoading());
