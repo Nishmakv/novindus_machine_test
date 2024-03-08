@@ -9,8 +9,8 @@ class AuthRepository {
     required String? password,
   }) async {
     FormData formData = FormData.fromMap({
-      "username": "test_user",
-      "password": "12345678",
+      "username": username!.trim(),
+      "password": password!.trim(),
     });
 
     final response = await client.post(

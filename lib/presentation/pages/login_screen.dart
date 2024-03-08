@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:novindus_machine_test/application/bloc/auth/login_cubit.dart';
 import 'package:novindus_machine_test/presentation/pages/home_screen.dart';
+import 'package:novindus_machine_test/presentation/widgets/common/button.dart';
 import 'package:novindus_machine_test/presentation/widgets/common/text_form_field.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -17,7 +18,7 @@ class LoginScreen extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return  const HomeScreen();
+                return const HomeScreen();
               },
             ),
           );
@@ -38,9 +39,18 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(
                   height: 200,
                   width: double.infinity,
-                  child: Image.asset(
-                    'assets/images/iPhone 13 & 14 - 1.png',
-                    fit: BoxFit.cover,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/Frame 176.png',
+                        fit: BoxFit.cover,
+                      ),
+                      Positioned(
+                        child: Image.asset('assets/images/Asset 1 2 (1).png',
+                            width: 70),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -81,22 +91,11 @@ class LoginScreen extends StatelessWidget {
                           label: 'Password',
                           hint: 'Enter your password'),
                       const SizedBox(height: 40),
-                      ElevatedButton(
+                      ButtonWidget(
                         onPressed: () {
                           authCubit.userLogin();
                         },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF006837),
-                          minimumSize: const Size(330, 50),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                        ),
-                        child: const Text(
-                          'Login',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.w600),
-                        ),
+                        text: 'Login',
                       ),
                       const SizedBox(height: 130),
                       const Text(

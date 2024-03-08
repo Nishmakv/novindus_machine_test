@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:novindus_machine_test/application/entity/treatment.dart';
 import 'package:novindus_machine_test/application/models/patient_register_response.dart';
-import 'package:novindus_machine_test/application/models/treatment_response.dart';
 import 'package:novindus_machine_test/application/repositories/patient_repository.dart';
 
 part 'patient_register_state.dart';
@@ -25,9 +24,10 @@ class PatientRegisterCubit extends Cubit<PatientRegisterState> {
   TextEditingController discountAmountController = TextEditingController();
   TextEditingController advanceAmountController = TextEditingController();
   TextEditingController balanceAmountController = TextEditingController();
-  int numberOfMales = 0;
-  int numberOfFemales = 0;
-  List<String> locations = ["Kochi", "Kozhikode", "Komarakom Kottayam"];
+  int numberOfMales = 1;
+  int numberOfFemales = 1;
+  List<String> locations = ["Kochi", "Kozhikode", "Kumarakom Kottayam"];
+  DateTime selectedDate = DateTime.now();
 
   Future patientRegister() async {
     emit(PatientRegisterLoading());
@@ -47,7 +47,7 @@ class PatientRegisterCubit extends Cubit<PatientRegisterState> {
       balanceAmount: double.parse(balanceAmountController.text),
       male: selectedTreatmentIds.join(","),
       female: selectedTreatmentIds.join(","),
-      dateNdTime: '',
+      dateNdTime: selectedDate.toString(),
     ));
     if (dataResponse) {
       emit(PatientRegisterSuccess());
@@ -67,25 +67,34 @@ class PatientRegisterCubit extends Cubit<PatientRegisterState> {
   }
 
   void onTreatment(String value) {
-    treatment = value;
+    selectedTreatmentIds.add(int.parse(value));
     emit(PatientRegisterSuccess());
   }
 
   // create function on treatment save
 
+  void onTreatmentSave(String name, int males, int females) {
+    selectedTreatments.add(Treatment(
+        name: treatment, female: numberOfFemales, males: numberOfMales));
+
+    numberOfMales = 1;
+    numberOfFemales = 1;
+    name = '';
+    emit(PatientRegisterSuccess());
+  }
+
   void onMaleCountChange(String action) {
     switch (action) {
       case "increment":
         numberOfMales++;
-        emit(PatientRegisterSuccess(numberOfMales: numberOfMales));
+        emit(PatientRegisterPeopleCount(numberOfMales: numberOfMales));
         break;
       case "decrement":
         if (numberOfMales > 0) {
           numberOfMales--;
-          emit(PatientRegisterSuccess(numberOfMales: numberOfMales));
+          emit(PatientRegisterPeopleCount(numberOfMales: numberOfMales));
         }
         break;
-      default:
     }
   }
 
@@ -93,13 +102,30 @@ class PatientRegisterCubit extends Cubit<PatientRegisterState> {
     switch (action) {
       case "increment":
         numberOfFemales++;
-        emit(PatientRegisterSuccess(numberOfFemales: numberOfFemales));
+        emit(PatientRegisterPeopleCount(numberOfFemales: numberOfFemales));
         break;
       case "decrement":
         if (numberOfFemales > 0) {
           numberOfFemales--;
-          emit(PatientRegisterSuccess(numberOfFemales: numberOfFemales));
+          emit(PatientRegisterPeopleCount(numberOfFemales: numberOfFemales));
         }
+    }
+  }
+
+  void onPaymentOption(String value) {
+    payment = value;
+    emit(PatientRegisterSuccess());
+  }
+
+  Future selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate) {
+      selectedDate = picked;
+      emit(PatientRegisterSuccess());
     }
   }
 }

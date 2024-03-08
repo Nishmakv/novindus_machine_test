@@ -42,7 +42,7 @@ class BranchDropDown extends StatelessWidget {
           ),
           items: patientBloc.branches.map((BranchResponse branch) {
             return DropdownMenuItem<String>(
-              value: branch.name,
+              value: branch.id.toString(),
               child: Text(branch.name),
             );
           }).toList(),

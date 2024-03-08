@@ -3,11 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:novindus_machine_test/application/bloc/patient_bloc/patient_cubit.dart';
 import 'package:novindus_machine_test/application/bloc/patient_register_bloc/patient_register_cubit.dart';
-import 'package:novindus_machine_test/presentation/widgets/common/branch_drop_down.dart';
-import 'package:novindus_machine_test/presentation/widgets/common/location_drop_down.dart';
-import 'package:novindus_machine_test/presentation/widgets/common/payment_radio_button.dart';
+import 'package:novindus_machine_test/presentation/widgets/branch_drop_down.dart';
+import 'package:novindus_machine_test/presentation/widgets/common/button.dart';
+import 'package:novindus_machine_test/presentation/widgets/location_drop_down.dart';
 import 'package:novindus_machine_test/presentation/widgets/common/text_form_field.dart';
-import 'package:novindus_machine_test/presentation/widgets/common/treatment_drop_down.dart';
+import 'package:novindus_machine_test/presentation/widgets/treatment_date_widget.dart';
+import 'package:novindus_machine_test/presentation/widgets/treatment_drop_down.dart';
 
 class PatientRegisterScreen extends StatelessWidget {
   const PatientRegisterScreen({super.key});
@@ -26,7 +27,9 @@ class PatientRegisterScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.white,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: const Icon(
             Ionicons.arrow_back_outline,
             color: Colors.black,
@@ -81,26 +84,41 @@ class PatientRegisterScreen extends StatelessWidget {
                       hint: 'Enter your full address',
                     ),
                     const SizedBox(height: 20),
-                    LocationDropDown(registerBloc: register,patientBloc: bloc),
+                    LocationDropDown(registerBloc: register, patientBloc: bloc),
                     const SizedBox(height: 20),
-                    BranchDropDown(registerBloc: register,patientBloc: bloc),
+                    BranchDropDown(registerBloc: register, patientBloc: bloc),
                     const SizedBox(height: 20),
-                    TreatmentDropDown(registerBloc: register,patientBloc: bloc),
+                    TreatmentDropDown(
+                        registerBloc: register, patientBloc: bloc),
                     const SizedBox(height: 20),
                     TextFieldWidget(
                       controller: register.totalAmountController,
                       label: 'Total Amount',
                       keyboardType: TextInputType.number,
-                  
                     ),
                     const SizedBox(height: 20),
                     TextFieldWidget(
                       controller: register.discountAmountController,
                       label: 'Discount Amount',
-                     keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.number,
                     ),
                     const SizedBox(height: 20),
-                    // PaymentWidget(),
+                    // PaymentWidget(registerBloc: register),
+                    TextFieldWidget(
+                      controller: register.advanceAmountController,
+                      keyboardType: TextInputType.number,
+                      label: 'Advance Amount',
+                    ),
+                    const SizedBox(height: 20),
+                    TextFieldWidget(
+                      controller: register.balanceAmountController,
+                      keyboardType: TextInputType.number,
+                      label: 'Balance Amount',
+                    ),
+                    const SizedBox(height: 20),
+                    DateWidget(registerBloc: register),
+                    const SizedBox(height: 20),
+                    ButtonWidget(onPressed: () {}, text: "Save")
                   ],
                 ),
               ),

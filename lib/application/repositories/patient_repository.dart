@@ -8,19 +8,10 @@ import 'package:novindus_machine_test/utils/shared_preferences.dart';
 class PatientListRepository {
   Dio client = Dio();
   SharedPrefs prefs = SharedPrefs();
-  late String token;
-
-  PatientListRepository() {
-    _getToken();
-  }
-
-  Future<void> _getToken() async {
-    token = await prefs.getToken('token');
-  }
 
   Future<List<Patient>> patientList() async {
     List<Patient> patient = [];
-
+    String token = await prefs.getToken('token');
     final response =
         await client.get('https://flutter-amr.noviindus.in/api/PatientList',
             options: Options(headers: {
