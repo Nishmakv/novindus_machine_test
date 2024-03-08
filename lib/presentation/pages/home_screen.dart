@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
         leading: IconButton(
           onPressed: () {},
           icon: const Icon(
-            Icons.arrow_back,
+           Ionicons.arrow_back_outline,
             color: Colors.black,
           ),
         ),
@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             onPressed: () {},
             icon: const Icon(
-              Icons.notification_add_outlined,
+             Ionicons.notifications_outline,
               color: Colors.black,
             ),
           ),

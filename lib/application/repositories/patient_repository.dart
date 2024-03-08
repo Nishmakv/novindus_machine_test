@@ -35,6 +35,7 @@ class PatientListRepository {
 
   Future<List<BranchResponse>> getBranch() async {
     List<BranchResponse> getBranch = [];
+    String token = await prefs.getToken('token');
     final response =
         await client.get('https://flutter-amr.noviindus.in/api/BranchList',
             options: Options(headers: {
@@ -42,7 +43,7 @@ class PatientListRepository {
               'Authorization': 'Bearer $token',
             }));
     print(response);
-    for (var element in (response.data as List)) {
+    for (var element in (response.data['branches'] as List)) {
       getBranch.add(BranchResponse.fromJson(element));
     }
     return getBranch;
@@ -50,6 +51,7 @@ class PatientListRepository {
 
   Future<List<TreatmentResponse>> getTreatmentName() async {
     List<TreatmentResponse> getTreatmentName = [];
+    String token = await prefs.getToken('token');
     final response = await client.get(
       'https://flutter-amr.noviindus.in/api/TreatmentList',
       options: Options(headers: {
@@ -58,7 +60,7 @@ class PatientListRepository {
       }),
     );
     print(response);
-    for (var element in (response.data['patient'] as List)) {
+    for (var element in (response.data['treatments'] as List)) {
       getTreatmentName.add(TreatmentResponse.fromJson(element));
     }
     return getTreatmentName;
@@ -66,6 +68,7 @@ class PatientListRepository {
 
   Future<bool> registerPatient(
       {required PatientRegisterRequest request}) async {
+    String token = await prefs.getToken('token');
     FormData formData = FormData.fromMap(request.toMap());
     final response = await client.post(
       'https://flutter-amr.noviindus.in/api/PatientUpdate',

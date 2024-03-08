@@ -1,13 +1,24 @@
 part of 'patient_register_cubit.dart';
 
-sealed class PatientRegisterState extends Equatable {
+abstract class PatientRegisterState extends Equatable {
   const PatientRegisterState();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
-final class PatientRegisterInitial extends PatientRegisterState {}
-final class PatientRegisterLoading extends PatientRegisterState {}
-final class PatientRegisterSuccess extends PatientRegisterState {}
-final class PatientRegisterFailure extends PatientRegisterState {}
+class PatientRegisterInitial extends PatientRegisterState {}
+
+class PatientRegisterLoading extends PatientRegisterState {}
+
+class PatientRegisterSuccess extends PatientRegisterState {
+  final int? numberOfMales; // Make numberOfMales optional by using int?
+  final int? numberOfFemales;
+
+  const PatientRegisterSuccess({this.numberOfMales,this.numberOfFemales});
+
+  @override
+  List<Object?> get props => [numberOfMales];
+}
+
+class PatientRegisterFailure extends PatientRegisterState {}

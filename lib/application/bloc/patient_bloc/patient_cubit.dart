@@ -13,7 +13,6 @@ class PatientListCubit extends Cubit<PatientListState> {
   List<Patient> patient = [];
   List<BranchResponse> branches = [];
   List<TreatmentResponse> treatments = [];
- 
 
   Future patientList() async {
     emit(PatientListLoading());
@@ -31,7 +30,7 @@ class PatientListCubit extends Cubit<PatientListState> {
     final dataResponse = await patientListRepository.getBranch();
     if (dataResponse.isNotEmpty) {
       branches = dataResponse;
-      emit(PatientListLoading());
+      emit(PatientListSuccess());
     } else {
       emit(PatientListFailure());
     }
